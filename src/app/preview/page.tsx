@@ -2,12 +2,16 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import PDFDocument from "@/components/PDFDocument";
+
 import { FormData } from "@/app/types";
 import image from "@/icons/chevron-left.svg";
 import Image from "next/image";
 import download from "@/icons/Download.svg";
 
+
+const PDFDocument = dynamic(() => import("@/components/PDFDocument"), {
+  ssr: false,
+});
 
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
