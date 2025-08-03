@@ -2,23 +2,22 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { Suspense } from "react";
 import backIcon from "@/icons/chevron-left.svg";
-import downloadIcon from "@/icons/Download.svg";
 import { FormData } from "@/app/types";
 import dynamic from "next/dynamic";
 
-// Dynamically import PDFDownloadButton without SSR (safe for ESM)
 const PDFDownloadButton = dynamic(() => import("@/components/PDFDownloadButton"), {
   ssr: false,
 });
 
-export default function PreviewPage() {
+function PreviewContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const data: FormData = JSON.parse(searchParams.get("data") || "{}");
 
   return (
-    <main className="min-h-screen p-10 bg-gray-100 relative">
+    <>
       {/* Back Button */}
       <button
         onClick={() => router.back()}
@@ -28,7 +27,7 @@ export default function PreviewPage() {
         <Image src={backIcon} alt="Back" width={50} height={42} />
       </button>
 
-      {/* Data Preview */}
+      {/* Data Display */}
       <div className="max-w-xl mx-auto bg-white p-6 shadow rounded text-sm border-2 border-black">
         {Object.entries(data).map(([key, value]) => (
           <div key={key} className="mb-2">
@@ -38,10 +37,20 @@ export default function PreviewPage() {
         ))}
       </div>
 
-      {/* PDF Download Button */}
+      {/* PDF Button */}
       <div className="max-w-xl mx-auto mt-4">
         <PDFDownloadButton data={data} />
       </div>
+    </>
+  );
+}
+
+export default function PreviewPage() {
+  return (
+    <main className="min-h-screen p-10 bg-gray-100 relative">
+      <Suspense fallback={<p className="text-center">Loading preview...</p>}>
+        <PreviewContent />
+      </Suspense>
     </main>
   );
 }
