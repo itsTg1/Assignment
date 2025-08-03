@@ -18,7 +18,7 @@ function PreviewContent() {
 
   return (
     <>
-      {/* Back Button */}
+      
       <button
         onClick={() => router.back()}
         className="absolute cursor-pointer top-6 left-6 text-xl hover:text-gray-800 transition-transform hover:scale-110 hover:shadow-md"
@@ -27,7 +27,7 @@ function PreviewContent() {
         <Image src={backIcon} alt="Back" width={50} height={42} />
       </button>
 
-      {/* Data Display */}
+      
       <div className="max-w-xl mx-auto bg-white p-6 shadow rounded text-sm border-2 border-black">
         {Object.entries(data).map(([key, value]) => (
           <div key={key} className="mb-2">
@@ -37,7 +37,7 @@ function PreviewContent() {
         ))}
       </div>
 
-      {/* PDF Button */}
+      
       <div className="max-w-xl mx-auto mt-4">
         <PDFDownloadButton data={data} />
       </div>
