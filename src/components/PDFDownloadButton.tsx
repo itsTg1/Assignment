@@ -1,14 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { FormData } from "@/app/types";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFDocument from "./PDFDocument";
-
-
-const PDFDownloadLink = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
-  { ssr: false }
-);
+import { FormData } from "@/app/types";
+import Image from "next/image";
+import downloadIcon from "@/icons/Download.svg";
 
 export default function PDFDownloadButton({ data }: { data: FormData }) {
   return (
@@ -16,12 +12,12 @@ export default function PDFDownloadButton({ data }: { data: FormData }) {
       document={<PDFDocument {...data} />}
       fileName="details.pdf"
     >
-      {({ loading }: { loading: boolean }) => (
-        <button
-          type="button"
-          className="bg-green-700 text-white px-4 py-2 rounded"
-        >
-          {loading ? "Loading..." : "Download PDF"}
+      {({ loading }) => (
+        <button className="w-full cursor-pointer bg-gradient-to-r from-[#064409] via-[#104812] to-[#527655] text-white px-4 py-3 rounded flex items-center justify-center gap-2 hover:from-[#527655] hover:via-[#527655] hover:to-[#527655] transition-all duration-200">
+          {!loading && (
+            <Image src={downloadIcon} alt="Download" width={20} height={20} />
+          )}
+          {loading ? "Loading..." : <span className="font-bold">Download PDF</span>}
         </button>
       )}
     </PDFDownloadLink>

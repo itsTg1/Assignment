@@ -1,12 +1,14 @@
 import { pdf } from "@react-pdf/renderer";
-import PDFDocument from "../components/PDFDocument";
+import PDFDocument from "@/components/PDFDocument";
+import { FormData } from "@/app/types";
 
-export async function downloadPDF(data: any) {
+export async function downloadPDF(data: FormData) {
   const blob = await pdf(<PDFDocument {...data} />).toBlob();
   const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "details.pdf";
-  link.click();
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "details.pdf";
+  a.click();
   URL.revokeObjectURL(url);
 }
