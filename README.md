@@ -22,8 +22,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - Clean and modular code structure
 
 src/
-│
-├── app/
-│ ├── page.tsx # Main form page ("/")
-│ └── preview/
-│ └── page.tsx # PDF preview page ("/preview")
+   app/
+     page.tsx # Main form page ("/")
+   preview/
+     page.tsx # PDF preview page ("/preview")
