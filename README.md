@@ -21,8 +21,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - Custom icons and styling with **Tailwind CSS**
 - Clean and modular code structure
 
-src/
-   app/
-     page.tsx # Main form page ("/")
-   preview/
-     page.tsx # PDF preview page ("/preview")
+src/app/page.tsx # Main form page ("/")
+
+src/app/preview/page.tsx # PDF preview page ("/preview")
